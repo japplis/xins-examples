@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultcode PUBLIC "-//XINS//DTD Result Code 1.4//EN" "http://www.xins.org/dtd/resultcode_1_4.dtd">
+
+<resultcode name="AlreadyRegistered"
+rcsversion="$Revision: 1.1 $" rcsdate="$Date: 2006/02/15 16:15:24 $">
+
+	<description>The customer is already registered.</description>
+
+</resultcode>

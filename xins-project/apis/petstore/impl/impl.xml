@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE impl PUBLIC "-//XINS//DTD Implementation 1.4//EN" "http://www.xins.org/dtd/impl_1_4.dtd">
+
+<impl web-path="store">
+	<bootstrap-properties>
+		<bootstrap-property name="xinsff.login.page">Login</bootstrap-property>
+		<bootstrap-property name="xinsff.default.command">DefaultCommand</bootstrap-property>
+		<bootstrap-property name="xinsff.unrestricted.pages">RegisterCustomer,ThankYouRegistration</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.Login">-</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.LoginOkay">SearchPet</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.Logout">DefaultCommand</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.SearchPet">-</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.RegisterCustomer">-</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.RegisterCustomerOkay">ThankYouRegistration</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.ThankYouRegistration">-</bootstrap-property>
+		<bootstrap-property name="xinsff.redirect.DefaultCommand">SearchPet</bootstrap-property>
+	</bootstrap-properties>
+	<runtime-properties>
+		<property name="petstore.database.location" required="true" type="_text">
+			<description>The directory that should contain the database.</description>
+		</property>
+		<property name="petstore.database.driver" required="true" type="_text">
+			<description>The name of the class to use as database driver.</description>
+		</property>
+		<property name="petstore.database.url" required="true" type="_text">
+			<description>The database URL.</description>
+		</property>
+		<property name="petstore.database.username" required="false" type="_text">
+			<description>The username that will connect to the database.</description>
+		</property>
+		<property name="petstore.database.password" required="false" type="_text">
+			<description>The password to use to connect to the database.</description>
+		</property>
+	</runtime-properties>
+
+	<!--content dir=".." includes="xins.properties" web-path="WEB-INF" /-->
+	<content dir="apis/petstore" includes="xslt/*.xslt database/pets.properties" />
+	<content dir="apis/petstore/web" includes="**" />
+
+	<dependency dir="apis/petstore/lib" includes="tinySQL.jar" />
+
+	<calling-convention name="xinsff" class="org.xins.server.frontend.FrontendCallingConvention" />
+
+	<instance name="_sessionManager" getter="getSessionManager" class="org.xins.server.frontend.SessionManager" />
+	<instance name="_databaseConnection" getter="getDatabaseConnection" class="com.mycompany.petstore.api.DatabaseConnection" />
+</impl>

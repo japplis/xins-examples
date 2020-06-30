@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultcode PUBLIC "-//XINS//DTD Result Code 1.4//EN" "http://www.xins.org/dtd/resultcode_1_4.dtd">
+
+<resultcode name="DatabaseFailure"
+rcsversion="$Revision: 1.1 $" rcsdate="$Date: 2006/02/14 16:00:00 $">
+
+	<description>The connection with the database failed or the SQL query failed</description>
+	<output>
+		<param name="details" required="false" type="_text">
+			<description>Details returned by the database.</description>
+		</param>
+	</output>
+
+</resultcode>

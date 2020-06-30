@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title> AJAX Example 1 </title>
+		<script type="text/javascript">
+		var req;
+
+		function loadXMLDoc(url) {
+			// branch for native XMLHttpRequest object
+			if (window.XMLHttpRequest) {
+				req = new XMLHttpRequest();
+				req.onreadystatechange = processStateChange;
+				try {
+					// The following line is needed for local tests on Netscape
+					netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserRead');
+					req.open("GET", url, true);
+				} catch (e) {
+					alert(e);
+				}
+				req.send(null);
+			// branch for IE/Windows ActiveX version
+			} else if (window.ActiveXObject) {
+				req = new ActiveXObject("Microsoft.XMLHTTP");
+				if (req) {
+					req.onreadystatechange = processStateChange;
+					req.open("GET", url, true);
+					req.send();
+				}
+			}
+		}
+
+		function processStateChange() {
+			if (req.readyState == 4) { // Complete
+				if (req.status == 200) { // OK response
+					if (window.XMLHttpRequest) {
+						// The following line is needed for local tests on Netscape
+						netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserRead');
+					}
+					applyResult(req.responseXML.documentElement);
+				} else {
+					alert("Problem: " + req.statusText);
+				}
+			}
+		}
+
+		// Only the functions below needs to be changed to adapt this example to your needs.
+
+		function callMyFunction() {
+			if (document.form1.personLastName.value.length > 1) {
+				var url = "http://localhost:8080/myproject/?_function=MyFunction&gender=" + document.form1.gender.value + "&personLastName=" + escape(document.form1.personLastName.value);
+				loadXMLDoc(url);
+			}
+		}
+
+		// The result will be the XINS XML.
+		function applyResult(result) {
+			var errorcode, answer;
+			errorcode = result.attributes.getNamedItem("errorcode");
+
+			if (errorcode) {
+				alert("Received error code " + errorcode.nodeValue);
+			} else {
+				if (!(answer = result.firstChild.textContent)) {
+					answer = result.firstChild.text;
+				}
+				document.getElementById("answer").innerHTML = answer;
+			}
+		}
+		</script>
+
+	</head>
+	<body bgcolor="white">
+		<center>
+			<font color="#5555aa" size="6">XINS - AJAX Example 1</font><br>
+		</center>
+		<font color="#5555aa" size="4">Description</font><p/>
+		This page is a demo that shows you how easy it is to use XINS in combination with AJAX.<br/>
+		This example requires the myproject API to run on your computer.<br/>
+		To run the myproject API, go to the <i>demo\xins-project</i> directory and execute <i>xins run-myproject</i>.
+
+		<p></p>
+		<font color="#5555aa" size="4">Form</font><p/>
+		A call is done to the API when you change the gender or lost the focus of the text field.
+		<form name="form1">
+			<table border="0" cellpadding="3" cellspacing="0">
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<select name="gender" onChange="callMyFunction()">
+							<option value="m">Male</option>
+							<option value="f">Female</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Last name:</td>
+					<td><input type="text" name="personLastName" onChange="callMyFunction()" size="15"/></td>
+				</tr>
+			</table>
+		</form>
+		Answer:<br/>
+		<span id="answer"></span>
+
+		<p></p>
+		<font color="#5555aa" size="4">Technical explanations</font><p/>
+		<ul>
+			<li>The form is a HTML form where the Javascript method <i>callMyFunction()</i> is called
+			on the events <i>onChange</i> for the "Gender" combo box and the <i>onChange</i> event
+			for the "Last name" text field.</li>
+			<li>The <i>callMyFunction()</i> method checks that the name has at least 2 characters
+			and then call the <i>loadXMLDoc(URL)</i> method with the URL pointing to the <i>MyFunction</i>
+			method of the XINS API.</li>
+			<li>The <i>loadXMLDoc(URL)</i> method call the XINS API and return the result in the
+			<i>processStateChange()</i> method.</li>
+			<li>The <i>processStateChange()</i> method checks that the XINS API has returned a
+			result and pass the result to the <i>applyResult()</i> method.</li>
+			<li>The <i>applyResult()</i> method looks for an <i>errorcode</i> attribute in the result.
+			If there is one, an alert window is shown with the error code, otherwise the content
+			of the result is inserted in the HTML.</li>
+			<li>The insertion is done at HTML tag <i>&lt;span id="answer"&gt;&lt;span&gt;</i> by the Javascript
+			code <i>document.getElementById("answer").innerHTML = answer;</i>.</li>
+		</ul>
+
+		You can have a look at the source code of this HTML page to fully understand this example.
+		<p align="right"><a href="callMetaFunctions.html">Next</a></p>
+	</body>
+</html>

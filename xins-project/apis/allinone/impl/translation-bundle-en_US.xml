@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<translation-bundle>
+	<translation entry="10000">Found the number <value-of-param name="number" /> in the parameter <value-of-param name="parameter" format="quoted" />.</translation>
+	<translation entry="10001">The system could not find any number.</translation>
+	<translation entry="10002">Odd: <value-of-param name="odd"/>, more than 1000: <value-of-param name="moreThousands"/>, square: <value-of-param name="square"/>, time: <value-of-param name="date"/>, in class  <value-of-param name="className"/>.</translation>
+</translation-bundle>

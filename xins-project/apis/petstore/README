@@ -1,0 +1,26 @@
+The petstore demo is a demo that tries to show you the advantages of using
+XINS when developing an API or a Web application.
+
+The total size of code specific to the application is 56 KB 
+(Specifications, Java code, HTML, XSLT).
+
+TinySQL has been used as JDBC database because of it's small size but if you
+want to develop a similar application, I advise you to change it to HSQLDB
+(http://hsqldb.sourceforge.net), H2 (http://www.h2database.com/) or 
+Hibernate (http://www.hibernate.org/).
+
+The application does not include an administrative part. If you want to 
+administrate the store (reject customers, see the ordered items, see the
+customers info, change password, remind password), use an SQL viewer such 
+as iSQLViewer (http://www.isqlviewer.com/) to edit and look into the database.
+
+The petstore demo uses the following features:
+ - Custom calling convention for executing the XSLT transformation and 
+   rendering HTML.
+ - Authentication based on a loging/password with restricted pages.
+ - AJAX demo in the Search page to give suggestions based on the first letters
+   typed.
+ - Redirection of pages.
+
+Note that the calling convention (the xiff package) will be integrated in
+XINS 1.5.0 and will also be available as a separate package for XINS 1.4.0.

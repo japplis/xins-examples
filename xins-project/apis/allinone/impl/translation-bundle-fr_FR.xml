@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translation-bundle>
+	<translation entry="10000">Trouvé le numéro <value-of-param name="number" />
+	dans le paramètre <value-of-param name="parameter" format="quoted" />.</translation>
+	<translation entry="10001">Le système n'a pas pu trouvé de numéro.</translation>
+	<translation entry="10002">Pair: <value-of-param name="odd"/>,
+	plus 1000: <value-of-param name="moreThousands"/>, carré: <value-of-param name="square"/>,
+	le: <value-of-param name="date"/>, dans la classe <value-of-param name="className"/> .</translation>
+</translation-bundle>

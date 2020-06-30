@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title> Ajax Example with Dojo toolkit </title>
+		<script type="text/javascript" src="http://o.aolcdn.com/dojo/0.4.3/dojo.js"></script>
+		<script type="text/javascript">
+			dojo.require("dojo.rpc.JsonService");
+			dojo.require("dojo.rpc.Deferred");
+		</script>
+		<script type="text/javascript">
+
+		dojo.addOnLoad(function(){
+			myproject = new dojo.rpc.JsonService("myproject.smd");
+		});
+
+		// Only the functions below needs to be changed to adapt this example to your needs.
+		function callMyFunction() {
+			var result = myproject.MyFunction(document.form1.gender.value, escape(document.form1.personLastName.value));
+			result.addCallbacks(applyResult, applyError);
+		}
+
+		// The result will be the XINS XML.
+		function applyResult(result) {
+			// MyFunction has an output parameter named 'message'.
+			document.getElementById("answer").innerHTML = result.message;
+		}
+
+		function applyError(error) {
+			alert("MyFunction returned an error: " + error.description);
+		}
+		</script>
+
+	</head>
+	<body bgcolor="white">
+		<center>
+			<font color="#5555aa" size="6">XINS - Ajax Example with the Dojo Toolkit</font><br>
+		</center>
+		<font color="#5555aa" size="4">Description</font><p/>
+		This page is a demo that shows you how easy it is to use XINS in combination with the Ajax Dojo toolkit.<br/>
+		This example requires the myproject API to run on your computer.<br/>
+		To run the myproject API, go to the <i>demo\xins-project</i> directory and execute <i>xins run-myproject</i>.<br/>
+		For security reason, Firefox won't allow to call the API.
+
+		<p></p>
+		<font color="#5555aa" size="4">Form</font><p/>
+		A call is done to the API when you change the gender or lost the focus of the text field.
+		<form name="form1">
+			<table border="0" cellpadding="3" cellspacing="0">
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<select name="gender" onChange="callMyFunction()">
+							<option value="m">Male</option>
+							<option value="f">Female</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Last name:</td>
+					<td><input type="text" name="personLastName" onChange="callMyFunction()" size="15"/></td>
+				</tr>
+			</table>
+		</form>
+		Answer:<br/>
+		<span id="answer"></span>
+
+		<p></p>
+		<font color="#5555aa" size="4">Technical explanations</font><p/>
+		<ul>
+			<li>I first created the <i>myproject.smd</i> file by executing <i>xins -Dapi.name=myproject smd</i>.</li>
+			<li>The API is loaded as Javascript object using <i>myproject = new dojo.rpc.JsonService("myproject.smd");</i>.</li>
+			<li>This object is used to call the function using JSON-RPC with <i>var result = myproject.MyFunction(gender, name)</i>.</li>
+			<li>The callback methods are defined using <i>result.addCallbacks(applyResult, applyError);</i>.</li>
+			<li>And the result is displayed in the HTML with <i>document.getElementById("answer").innerHTML = result.message;</i></li>
+		</ul>
+
+		You can have a look at the source code of this HTML page to fully understand this example.
+		<p align="right"><a href="callMyFunction2.html">Prev</a> - <a href="callMyFunctionjQuery.html">Next</a></p>
+	</body>
+</html>

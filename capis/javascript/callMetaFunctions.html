@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title> AJAX Example 2 </title>
+		<script type="text/javascript">
+
+		function ajaxLoader(url,id) {
+			var req;
+			if (document.getElementById) {
+				req = (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+			}
+			if (req) {
+				req.onreadystatechange = function() {
+					if (req.readyState == 4 && req.status == 200) {
+						el = document.getElementById(id);
+						el.innerHTML = req.responseText;
+						sortables_init();
+					} else if (req.readyState == 4) {
+						alert("Problem: " + req.statusText);
+					}
+				}
+				req.open("GET", url, true);
+				req.send(null);
+			}
+		}
+
+		function callMeta(meta) {
+			var url = document.form0.location.value + "?_function=" +
+			          meta + "&_convention=_xins-xslt&_template=" + meta + ".xslt";
+			ajaxLoader(url, meta);
+		}
+		</script>
+		<script type="text/javascript" src="sorttable.js"></script>
+
+	</head>
+	<body bgcolor="white">
+		<center>
+			<font color="#5555aa" size="6">XINS - AJAX Example 2</font><br>
+		</center>
+		<font color="#5555aa" size="4">Description</font><p/>
+		This page is a demo shows calls to the meta functions of an API that returns HTML by
+		using the XSLT calling convention.<br/>
+		This example requires the myproject API to run on your computer.<br/>
+		To run the myproject API, go to the <i>demo\xins-project</i> directory and execute <i>xins run-myproject</i>.
+
+		<p></p>
+		<font color="#5555aa" size="4">Meta functions</font><p/>
+
+		<form name="form0">
+			Location:
+			<input type="text" name="location" value="http://localhost:8080/myproject/" size="50"/>
+		</form>
+
+		<form name="form1">
+			<input type="button" onClick="callMeta('_GetVersion')" value="Get XINS Version"></input>
+		</form>
+		Answer:<br/>
+		<span id="_GetVersion"></span>
+
+		<p></p><!--ts_makeSortable(document.getElementById('_GetSettings').getElementsByTagName('table')[0]);-->
+		<form name="form2">
+			<input type="button" onClick="callMeta('_GetSettings');" value="Get Settings"></input><br/>
+			<input type="button" onClick="document.getElementById('_GetSettings').innerHTML = ''" value="Hide Settings"></input>
+		</form>
+		Answer:<br/>
+		<span id="_GetSettings"></span>
+
+		<p></p>
+		<a href="#" onClick="callMeta('_GetStatistics')">Get Statistics</a><br/>
+		<a href="#" onClick="document.getElementById('_GetStatistics').innerHTML = ''">Hide Statistics</a>
+		<p></p>
+		Answer:<br/>
+		<span id="_GetStatistics"></span>
+
+		<p></p>
+		<font color="#5555aa" size="4">Technical explanations</font><p/>
+		In the explanations <i>_meta_</i> is the name of the meta function (e.g. _GetVersion).
+		<ul>
+			<li>When you click on the Get button the Javascript function <i>callMeta(_meta_)</i> is called.</li>
+			<li>The <i>callMeta()</i> function, call the XINS API with the <i>_xins-xslt</i>
+			calling convention. the <i>_template</i> parameter points to
+			<i>http://xins.sf.net/demo/_meta_.xslt</i>.</li>
+			<li>The returned HTML from the XINS call is inserted to the HTML tag
+			<i>&lt;span id="_meta_"&gt;&lt;span&gt;</i> by the Javascript
+			code <i>document.getElementById(meta).innerHTML = req.responseText;</i>.</li>
+			<li>The hide button hides the text by executing the Javascript
+			<i>document.getElementById(_meta_).innerHTML = ''</i></li>
+		</ul>
+
+		You can have a look at the source code of this HTML page to fully understand this example.
+		<p></p>
+		XSLT used by this example:
+		<a href="http://xins.sourceforge.net/demo/_GetVersion.xslt">GetVersion</a>,
+		<a href="http://xins.sourceforge.net/demo/_GetSettings.xslt">GetSettings</a>,
+		<a href="http://xins.sourceforge.net/demo/_GetStatistics.xslt">GetStatistics</a>.
+
+		<p></p>
+		<b>For security reason, this script works only locally with Internet Explorer or with other
+		browsers when the HTML page is hosted on the same server as the API.</b>
+		<p align="right"><a href="callMyFunction.html">Prev</a> - <a href="callMyFunction2.html">Next</a></p>
+	</body>
+</html>

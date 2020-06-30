@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultcode PUBLIC "-//XINS//DTD Result Code 1.4//EN" "http://www.xins.org/dtd/resultcode_1_4.dtd">
+
+<resultcode name="ProductNotAvailable"
+rcsversion="$Revision: 1.1 $" rcsdate="$Date: 2006/03/20 16:20:36 $">
+
+	<description>The product the user wants to order is not available.</description>
+
+</resultcode>

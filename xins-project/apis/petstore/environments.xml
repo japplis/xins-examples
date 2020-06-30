@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE environments PUBLIC "-//XINS//DTD Environments 1.4//EN" "http://www.xins.org/dtd/environments_1_4.dtd">
+
+<environments>
+
+	<environment id="localhost" url="http://127.0.0.1:8080/petstore/" />
+	<environment id="myjavaserver.com" url="http://xins.users.mcs2.netarray.com/petstore/store/" />
+
+</environments>

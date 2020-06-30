@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC
+ "-//Mort Bay Consulting//DTD Configure 1.2//EN"
+ "http://jetty.mortbay.org/configure_1_2.dtd">
+
+<Configure class="org.mortbay.jetty.Server">
+
+  <Call name="addListener">
+    <Arg>
+      <New class="org.mortbay.http.SocketListener">
+        <Set name="port">8080</Set>
+      </New>
+    </Arg>
+  </Call>
+
+  <Call name="addWebApplication">
+    <Arg>/filtered/*</Arg>
+    <Arg>build/webapps/filteredproject/filteredproject.war</Arg>
+  </Call>
+
+</Configure>

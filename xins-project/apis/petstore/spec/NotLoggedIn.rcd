@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultcode PUBLIC "-//XINS//DTD Result Code 1.4//EN" "http://www.xins.org/dtd/resultcode_1_4.dtd">
+
+<resultcode name="NotLoggedIn"
+rcsversion="$Revision: 1.1 $" rcsdate="$Date: 2006/02/14 16:00:00 $">
+
+	<description>The user is not logged in.</description>
+
+</resultcode>

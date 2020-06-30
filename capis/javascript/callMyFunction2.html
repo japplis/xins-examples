@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title> AJAX Example 3 </title>
+		<script type="text/javascript" src="sarissa.js"> </script>
+		<script type="text/javascript">
+			function callMyFunction() {
+				// Send the request
+				var url = "http://localhost:8080/myproject/?_function=MyFunction&gender=" + document.form1.gender.value + "&personLastName=" + escape(document.form1.personLastName.value);
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("GET", url, false);
+				xmlhttp.send(null);
+
+				// Transform the XINS result
+				// For bigger style sheets or if often called, move the code so that
+				// the parsing an import is done only once.
+				var processor = new XSLTProcessor();
+				var xslDoc = Sarissa.getDomDocument();
+				var xslStr = "<?xml version='1.0' encoding='UTF-8'?>"+
+						"<xsl:stylesheet version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform' >"+
+							"<xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes'/>"+
+							"<xsl:param name='color'/>"+
+							"<xsl:template match='/'>"+
+							"<xsl:choose><xsl:when test='/result/@errorcode'>"+
+							"<font size='3' color='red'>"+
+							"<xsl:text>Error returned: </xsl:text>"+
+							"<xsl:value-of select='/result/@errorcode'/>"+
+							"</font></xsl:when>"+
+							"<xsl:otherwise><font size='4' color='{$color}'>"+
+							"<xsl:value-of select='/result/param[@name=\"message\"]/text()'/>"+
+							"</font></xsl:otherwise></xsl:choose>"+
+							"</xsl:template></xsl:stylesheet>";
+				xslDoc = (new DOMParser()).parseFromString(xslStr, "text/xml");
+				// or var xslDoc = Sarissa.getDomDocument("http://foo.org/ns/uri/foo.xslt","foo", null);
+				processor.importStylesheet(xslDoc);
+				processor.setParameter(null, "color", document.form1.color.value);
+				var newDocument = processor.transformToDocument(xmlhttp.responseXML);
+				document.getElementById("answer").innerHTML = new XMLSerializer().serializeToString(newDocument);
+			}
+		</script>
+
+	</head>
+	<body bgcolor="white">
+		<center>
+			<font color="#5555aa" size="6">XINS - AJAX Example 3</font><br>
+		</center>
+		<font color="#5555aa" size="4">Description</font><p/>
+		This page is a demo that call a XINS API and transform the result using XSLT on the client side.<br/>
+		This example requires the myproject API to run on your computer.<br/>
+		To run the myproject API, go to the <i>demo\xins-project</i> directory and execute <i>xins run-myproject</i>.
+
+		<p></p>
+		<font color="#5555aa" size="4">Form</font><p/>
+		<form name="form1">
+			<table border="0" cellpadding="3" cellspacing="0">
+				<tr>
+					<td>Color:</td>
+					<td><input type="text" name="color" value="blue" size="15"/></td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<select name="gender">
+							<option value="m">Male</option>
+							<option value="f">Female</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Last name:</td>
+					<td><input type="text" name="personLastName" size="15"/></td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td colspan="2" align="right"><input type="button" name="send" value="Send" onclick="callMyFunction()" /></td>
+				</tr>
+			</table>
+		</form>
+		<span id="answer"></span>
+
+		<p></p>
+		<font color="#5555aa" size="4">Technical explanations</font><p/>
+		<ul>
+			<li>This example uses the <a href="http://sarissa.sf.net">Sarissa</a> Javascript library.
+			The library is imported by adding in the head section <i>
+			&lt;script type="text/javascript" src="sarissa.js"&gt; &lt;/script&gt;</i></li>
+			<li>When you click on the Send button the Javascript method <i>callMyFunction()</i> is called.</li>
+			<li>The <i>callMyFunction()</i> method call the XINS API synchroniously with the parameters filled in the form.
+			The result is stored in the <i>xmlhttp</i> variable.</li>
+			<li>The XSLT is put in the <i>xslDoc</i> variable by parsing the XSLT string.</li>
+			<li>The parameter <i>color</i> is passed to the style sheet with the value of the text field.</li>
+			<li>The script does the XSLT transformation and put the resulted HTML at the specified place in the HTML page.</li>
+		</ul>
+
+		You can have a look at the source code of this HTML page to fully understand this example.<p></p>
+		<b>For security reason, this script works only locally with Internet Explorer or with other
+		browsers when the HTML page is hosted on the same server as the API.</b>
+		<p align="right"><a href="callMetaFunctions.html">Prev</a> - <a href="callMyFunctionDojo.html">Next</a></p>
+	</body>
+</html>

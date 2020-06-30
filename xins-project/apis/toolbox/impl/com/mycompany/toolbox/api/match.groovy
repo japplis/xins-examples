@@ -1,0 +1,1 @@
+["match" : entry ==~ regexp]

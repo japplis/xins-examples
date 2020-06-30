@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE api PUBLIC "-//XINS//DTD XINS API 1.4//EN" "http://www.xins.org/dtd/api_1_4.dtd">
+
+<api name="petstore" owner="johnd"
+rcsversion="$Revision: 1.5 $" rcsdate="$Date: 2006/03/20 16:20:36 $">
+
+	<description>Blueprint example for the XINS Web Services framework.</description>
+
+	<function name="LoginOkay" />
+	<function name="Logout" />
+	<function name="OrderPet" />
+	<function name="RegisterCustomerOkay" />
+	<function name="SearchPetOkay" />
+
+	<type name="Age" />
+	<type name="EMail" />
+	<type name="FirstName" />
+	<type name="Password" />
+	<type name="PhoneNumber" />
+	<type name="Salutation" />
+	<type name="Surname" />
+
+	<resultcode name="AlreadyRegistered" />
+	<resultcode name="DatabaseFailure" />
+	<resultcode name="IncorrectPassword" />
+	<resultcode name="NotLoggedIn" />
+	<resultcode name="ProductNotAvailable" />
+	<resultcode name="UnknownLogin" />
+</api>

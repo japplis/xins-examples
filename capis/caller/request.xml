@@ -1,0 +1,4 @@
+<request function="MyFunction">
+	<param name="gender">m</param>
+	<param name="personLastName">Doe</param>
+</request>

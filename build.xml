@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="US-ASCII" ?>
+
+<!-- This Ant script helps you to compile and run the examples
+     provided in XINS release. If you want an Ant script to
+		 compile and run your own API, look at nbbuild.xml file. -->
+<project name="examples" default="init" basedir=".">
+
+	<target name="init">
+		<property environment="env" />
+		<available property="xins.home" value="${env.XINS_HOME}"
+		           file="${env.XINS_HOME}" type="dir" />
+		<available property="xins.home" value="${basedir}/../xins"
+		           file="${basedir}/../xins" type="dir" />
+		<fail message="Please set the XINS_HOME variable correctly" unless="xins.home" />
+
+		<property name="project.dir" value="${basedir}/xins-project" />
+
+		<path id="xins.classpath">
+			<fileset dir="${xins.home}/build">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${xins.home}/lib">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<available property="build.exists" file="${project.dir}/build/build.xml" />
+		<antcall target="make-build" />
+	</target>
+
+	<target name="make-build" unless="build.exists">
+		<ant antfile="${env.XINS_HOME}/src/ant/make-build.xml" dir="${project.dir}">
+			<property name="xins_home" value="${env.XINS_HOME}" />
+			<property name="user.dir" value="${project.dir}" />
+		</ant>
+	</target>
+
+	<target name="demo-caller-myproject" depends="init">
+		<antcall target="demo-caller">
+			<param name="config" value="xins.properties" />
+			<arg name="request" value="capis/caller/request.xml" />
+		</antcall>
+	</target>
+
+	<target name="demo-caller" depends="init" description="Executes the 'Caller' demo program">
+		<condition property="demo-caller-properties-set">
+			<and>
+				<isset property="config"  />
+				<isset property="request" />
+			</and>
+		</condition>
+		<fail message="The properties 'config' and 'request' need to be set." unless="demo-caller-properties-set" />
+		<mkdir dir="build/demo-caller" />
+		<javac srcdir="capis/caller"
+		       destdir="build/caller-demo"
+		       debug="true"
+		       deprecation="true"
+		       optimize="false">
+			<classpath>
+				<path refid="xins.classpath" />
+			</classpath>
+		</javac>
+		<java classname="org.xins.demos.caller.Main" fork="true">
+			<classpath>
+				<path refid="xins.classpath" />
+				<pathelement path="build/caller-demo"/>
+			</classpath>
+			<arg value="${config}" />
+			<arg value="${request}" />
+		</java>
+	</target>
+
+	<target name="capi-ex1" depends="init" description="Execute the CAPI myproject example.">
+		<!-- Creates the capi jar files if needed. -->
+		<ant antfile="${project.dir}/build/build.xml"
+		     dir="${project.dir}"
+		     target="jar-myproject">
+			<property name="user.dir" value="${project.dir}" />
+		</ant>
+
+		<!-- Compiles the program. -->
+		<javac srcdir="capis/myproject" destdir="capis/myproject">
+			<classpath>
+				<pathelement path="xins-project/build/capis/myproject-capi.jar" />
+				<path refid="xins.classpath" />
+			</classpath>
+		</javac>
+
+		<!-- Executes the program. -->
+		<echo message="Executing TestMyFunction" />
+		<java classname="com.mycompany.example1.TestMyFunction" fork="true">
+			<classpath>
+				<path path="capis/myproject" />
+				<pathelement path="xins-project/build/capis/myproject-capi.jar" />
+				<path refid="xins.classpath" />
+			</classpath>
+			<!-- For more information on the arguments look at the source code. -->
+			<arg line="http://localhost:8080/my-project/ female Chang" />
+		</java>
+	</target>
+
+</project>

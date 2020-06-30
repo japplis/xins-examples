@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<log domain="com.mycompany.allinone.api" public="true">
+
+	<translation-bundle locale="en_US" />
+	<translation-bundle locale="fr_FR" />
+
+	<group id="exampleLogdoc" name="Example">
+		<entry id="10000" level="DEBUG">
+			<description>Found a number in the input.</description>
+			<param name="parameter" />
+			<param name="number" type="int32" nullable="false" />
+		</entry>
+		<entry id="10001" level="ERROR" exception="true">
+			<description>The system can not find any number in the given parameter.</description>
+		</entry>
+		<entry id="10002" level="WARNING">
+			<description>Example of warning using a lot of different parameters.</description>
+			<param name="odd" type="boolean" nullable="false" />
+			<param name="moreThousands" type="boolean" />
+			<param name="square" type="int64" nullable="false" />
+			<param name="date" type="object" nullable="false" />
+			<param name="className" type="text" nullable="false" />
+		</entry>
+	</group>
+</log>

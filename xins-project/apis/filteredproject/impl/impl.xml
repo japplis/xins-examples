@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE impl PUBLIC "-//XINS//DTD Implementation 1.0//EN" "http://xins.sourceforge.net/dtd/impl_1_0.dtd">
+
+<impl>
+	<dependency dir="build/capis" includes="myproject-capi.jar" />
+</impl>
