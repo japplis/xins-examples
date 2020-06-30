@@ -1,0 +1,120 @@
+/* $Id: style.css,v 1.2 2006/04/05 09:17:43 agoubard Exp $ */
+
+/* ------------------------------------- Generic element type-based rules --*/
+
+body {
+   font-family: Verdana, sans-serif, Arial, Helvetica;
+   font-size: 9pt;
+   color: #000000;
+   background-color: #ffffff;
+}
+
+h1 {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   font-weight: bold;
+   font-size: 280%;
+   color: #55a;
+}
+
+h2 {
+   color: #ffffff;
+   background-color: #55a;
+   margin: 0;
+   padding: 0.2em;
+   font-size: 100%;
+   font-weight: bold;
+   text-align: left;
+}
+
+h3 {
+   border-top: 1px dotted #8888dd;
+   color: #55a;
+   margin-top: 1.5em;
+   margin-bottom: 0.7em;
+   font-size: 100%;
+   font-weight: bold;
+}
+
+li {
+   margin-left: 1em;
+   padding-left: 1em;
+}
+
+img {
+   border-style: none;
+}
+
+table {
+	border: 1px dotted #5555AA;
+}
+
+table tr td, table tr th {
+   vertical-align: top;
+   text-align: left;
+   padding: 2pt;
+}
+
+table#content td#submit {
+	text-align: right;
+	margin-top: 20pt;
+	padding: 5pt;
+	border-top: 1px solid #BBBBBB;
+}
+
+table#content td#label {
+	padding-left: 10pt;
+	color: #50529E;
+}
+
+ul {
+   list-style-type: square;
+}
+
+code,
+pre {
+   color: #880000;
+}
+
+div#content table, div#content span {
+	margin-left: 100pt;
+}
+
+input {
+	border: 1px solid #5555AA;
+	color:#5555AA;
+}
+
+input#submit {
+	background-color: #EEEEFF;
+	color:#5555AA;
+}
+
+table#header {
+	width:100%;
+	margin-top: 20pt; 
+	border: #BBBBBB solid 1px;
+}
+
+table#header td {
+	background-color: #EEEEFF;
+	padding-left:100pt;
+	vertical-align:middle;
+	margin-top:15pt;
+	color:#5555AA;
+	font-size:24px
+}
+
+form {
+	padding-bottom: 10pt;
+	padding-bottom: expression("0pt");
+}
+
+div#logo {
+	position:absolute;
+	top:5pt;
+	background-image: url(rabbit.gif);
+	width: 97px;
+	height: 154px;
+}

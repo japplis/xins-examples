@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title> Ajax Example with jQuery </title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"> </script>
+		<script type="text/javascript">
+
+		function callMyFunction() {
+			var url = "http://localhost:8080/myproject/?_convention=_xins-json&_function=MyFunction&gender=" + document.form1.gender.value + "&personLastName=" + escape(document.form1.personLastName.value);
+			$.getJSON(url, function(result) {
+        $('#answer').html(result.message);
+      }).error(function() {
+        $('#answer').html("<font color='red'>Failed</font>");
+      });
+		}
+		</script>
+
+	</head>
+	<body bgcolor="white">
+		<center>
+			<font color="#5555aa" size="6">XINS - Ajax Example with the jQuery</font><br>
+		</center>
+		<font color="#5555aa" size="4">Description</font><p/>
+		This page is a demo that shows you how easy it is to use XINS in combination with the JavaScript jQuery library.<br/>
+		This example requires the myproject API to run on your computer.<br/>
+		To run the myproject API, go to the <i>demo\xins-project</i> directory and execute <i>xins run-myproject</i>.<br/>
+		For security reason, Firefox won't allow to call the API.
+
+		<p></p>
+		<font color="#5555aa" size="4">Form</font><p/>
+		A call is done to the API when you change the gender or lost the focus of the text field.
+		<form name="form1">
+			<table border="0" cellpadding="3" cellspacing="0">
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<select name="gender" onChange="callMyFunction()">
+							<option value="m">Male</option>
+							<option value="f">Female</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Last name:</td>
+					<td><input type="text" name="personLastName" onChange="callMyFunction()" size="15"/></td>
+				</tr>
+			</table>
+		</form>
+		Answer:<br/>
+		<span id="answer"></span>
+
+		<p></p>
+		<font color="#5555aa" size="4">Technical explanations</font><p/>
+    <ul>
+      <li>Use the <a href="http://api.jquery.com/jQuery.getJSON/">getJSON method of jQuery in combination with the XINS JSON calling convention.</a></li>
+      <li>The <i>getJSON</i> returns a <a href="http://api.jquery.com/jQuery.ajax/">jqXHR object</a> so you can use also the following methods:
+        <i>error/fail</i>, <i>success/done</i>, <i>complete/always</i>, <i>beforeSend</i>, <i>dataFilter</i>.</li>
+    </ul>
+		You can have a look at the source code of this HTML page to fully understand this example.
+		<p align="right"><a href="callMyFunctionDojo.html">Prev</a></p>
+	</body>
+</html>

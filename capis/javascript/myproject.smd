@@ -1,0 +1,15 @@
+{
+	"SMDVersion": ".1",
+	"objectName": "myproject",
+	"serviceType": "JSON-RPC",
+	"serviceURL": "http://127.0.0.1:8080/myproject/?_convention=_xins-jsonrpc",
+	"methods":[
+		{
+			"name": "MyFunction",
+			"parameters":[
+				{"name": "gender"},
+				{"name": "personLastName"}
+			]
+		}
+	]
+}

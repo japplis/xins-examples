@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultcode PUBLIC "-//XINS//DTD Result Code 1.5//EN" "http://www.xins.org/dtd/resultcode_1_5.dtd">
+
+<resultcode name="AccountNotFound"
+rcsversion="$Revision: 1.1 $" rcsdate="$Date: 2007/01/05 09:05:19 $">
+
+	<description>No user is associated with the given account number.</description>
+
+</resultcode>

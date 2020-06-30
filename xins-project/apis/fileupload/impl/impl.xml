@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE impl PUBLIC "-//XINS//DTD Implementation 1.4//EN" "http://www.xins.org/dtd/impl_1_4.dtd">
+
+<impl>
+	<runtime-properties>
+		<property name="fileupload.directory" required="false" type="_text">
+			<description>Directory where the uploaded files should be stored.</description>
+		</property>
+	</runtime-properties>
+	<dependency dir="apis/fileupload/lib" includes="*.jar" />
+	<calling-convention name="multipart" class="com.mycompany.fileupload.multipart.MultipartCallingConvention" />
+</impl>

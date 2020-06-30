@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.ant.freeform</type>
+    <configuration>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
+            <!-- Do not use Project Properties customizer when editing this file manually. -->
+            <name>petstore</name>
+            <properties>
+                <property name="ant.script">nbbuild.xml</property>
+            </properties>
+            <folders>
+                <source-folder>
+                    <label>impl</label>
+                    <type>java</type>
+                    <location>impl</location>
+                </source-folder>
+            </folders>
+            <ide-actions>
+                <action name="build">
+                    <script>${ant.script}</script>
+                    <target>build</target>
+                </action>
+                <action name="clean">
+                    <script>${ant.script}</script>
+                    <target>clean</target>
+                </action>
+                <action name="javadoc">
+                    <script>${ant.script}</script>
+                    <target>javadoc</target>
+                </action>
+                <action name="run">
+                    <script>${ant.script}</script>
+                    <target>run</target>
+                </action>
+                <action name="test">
+                    <script>${ant.script}</script>
+                    <target>test</target>
+                </action>
+                <action name="rebuild">
+                    <script>${ant.script}</script>
+                    <target>clean</target>
+                    <target>build</target>
+                </action>
+                <action name="debug">
+                    <script>${ant.script}</script>
+                    <target>debug</target>
+                </action>
+                <action name="debug.fix">
+                    <script>${ant.script}</script>
+                    <target>debug-fix</target>
+                </action>
+            </ide-actions>
+            <view>
+                <items>
+                    <source-folder style="packages">
+                        <label>impl</label>
+                        <location>impl</location>
+                    </source-folder>
+                    <source-file>
+                        <location>${ant.script}</location>
+                    </source-file>
+                </items>
+                <context-menu>
+                    <ide-action name="build"/>
+                    <ide-action name="clean"/>
+                    <ide-action name="javadoc"/>
+                    <ide-action name="run"/>
+                    <ide-action name="test"/>
+                    <ide-action name="rebuild"/>
+                    <ide-action name="debug"/>
+                    <ide-action name="debug.fix"/>
+                    <action>
+                        <script>${ant.script}</script>
+                        <label>Generate Specdocs</label>
+                        <target>specdocs</target>
+                    </action>
+                    <action>
+                        <script>${ant.script}</script>
+                        <label>Profile Project</label>
+                        <target>profile</target>
+                    </action>
+                    <action>
+                        <script>${ant.script}</script>
+                        <label>Ask...</label>
+                        <target>ask</target>
+                    </action>
+                </context-menu>
+            </view>
+            <subprojects/>
+        </general-data>
+        <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/1">
+            <compilation-unit>
+                <package-root>impl</package-root>
+                <classpath mode="compile">../../build/classes-api/petstore;../../build/classes-types/petstore;../../../../xins/build/logdoc.jar;../../../../xins/build/xins-client.jar;../../../../xins/build/xins-server.jar;../../../../xins/build/xins-common.jar;../../../../xins/lib/servlet.jar;../../../../xins/lib/xmlenc.jar</classpath>
+                <source-level>1.4</source-level>
+            </compilation-unit>
+        </java-data>
+    </configuration>
+</project>

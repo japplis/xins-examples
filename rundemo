@@ -1,0 +1,42 @@
+#! /bin/sh
+
+# Determine location of Apache Ant
+if [ -z "${ANT_HOME}" ]
+then
+   echo "ERROR: Environment variable ANT_HOME does not point to an Apache Ant"
+   echo "       installation directory."
+   echo ""
+   echo "Please install Apache Ant 1.6.2 or higher and set ANT_HOME accordingly."
+   exit 1
+fi
+
+# Determine location of Java VM
+if [ -z "$JAVA_HOME" ]
+then
+   echo "ERROR: Environment variable JAVA_HOME does not point to a J2SE"
+   echo "       installation directory."
+   echo ""
+   echo "Please install J2SE 1.4.2 or higher and set JAVA_HOME accordingly."
+   exit 1
+fi
+
+# Determine location of XINS
+cd xins-project
+XINS_HOME=../..
+
+# Some verbose output
+echo "XINS home directory used is: ${XINS_HOME}"
+echo "Compiling and running 'myproject' API."
+echo "Use the link provided in README.html file to execute it."
+echo ""
+
+# Pass control to XINS
+#
+# There is one call to the XINS shell script per target, to work around SF.net
+# bug #1198206.
+#
+if [ -f "build/build.xml" ]; then
+   rm build/build.xml
+fi
+${XINS_HOME}/bin/xins -Dorg.xins.server.config=../xins.properties specdocs-myproject
+${XINS_HOME}/bin/xins -Dorg.xins.server.config=../xins.properties      run-myproject
